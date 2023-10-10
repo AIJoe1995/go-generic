@@ -8,6 +8,12 @@ type Node[T comparable] struct {
 	val  T
 }
 
+func NewNode[T comparable](val T) *Node[T] {
+	return &Node[T]{
+		val: val,
+	}
+}
+
 type DoubleLinkedList[T comparable] struct {
 	head *Node[T]
 	tail *Node[T]
@@ -143,7 +149,7 @@ func (dll *DoubleLinkedList[T]) Remove(val T) (int, bool) {
 		node.prev = nil
 		dll.size -= 1
 		// todo delete node release memory
-	} else if res == dll.size { // not found
+	} else if res == -1 { // not found
 		return res, false
 	} else {
 		node.prev.next = node.next
@@ -154,14 +160,16 @@ func (dll *DoubleLinkedList[T]) Remove(val T) (int, bool) {
 	return res, true
 }
 
-func (dll *DoubleLinkedList[T]) RemoveAt(index int) error {
+func (dll *DoubleLinkedList[T]) RemoveAt(index int) (T, error) {
+	var res T
 	if index < 0 || index >= dll.size {
-		return errs.NewErrIndexOutOfRange(dll.size, index)
+		return res, errs.NewErrIndexOutOfRange(dll.size, index)
 	}
 	// todo delete node release memory
 	node := dll.head.next
 	// remove head
 	if index == 0 {
+		res = node.val
 		dll.head.next = node.next
 		node.next.prev = dll.head
 		node.next.prev = nil
@@ -169,6 +177,7 @@ func (dll *DoubleLinkedList[T]) RemoveAt(index int) error {
 		dll.size -= 1
 	} else if index == dll.size-1 { // remove tail
 		node = dll.tail.prev
+		res = node.val
 		dll.tail = node.prev
 		node.prev.next = nil
 		node.prev = nil
@@ -178,11 +187,12 @@ func (dll *DoubleLinkedList[T]) RemoveAt(index int) error {
 		for cnt := 0; cnt < index; cnt++ {
 			node = node.next
 		}
+		res = node.val
 		node.prev.next = node.next
 		node.next.prev = node.prev
 		dll.size -= 1
 	}
-	return nil
+	return res, nil
 
 }
 
