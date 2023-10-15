@@ -16,3 +16,11 @@ func NewErrKeyNotExist() error {
 func NewSystemError() error {
 	return errors.New("system error. \n")
 }
+
+func NewErrEmptyQueue() error {
+	return errors.New("queue empty. \n")
+}
+
+func NewErrQueueFull() error {
+	return errors.New("queue full. \n")
+}
