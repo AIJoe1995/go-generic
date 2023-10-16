@@ -76,7 +76,7 @@ func TestDoubleLinkedList_Get(t *testing.T) {
 		wantSlice []int
 	}{
 		{
-			name:      "Get node at index -1",
+			name:      "Get skipListNode at index -1",
 			dll:       BuildDoubleLinkedList[int]([]int{1, 2}),
 			index:     -1,
 			wantErr:   errs.NewErrIndexOutOfRange(2, -1),
@@ -84,7 +84,7 @@ func TestDoubleLinkedList_Get(t *testing.T) {
 			wantSlice: []int{1, 2},
 		},
 		{
-			name:      "Get node at index 2",
+			name:      "Get skipListNode at index 2",
 			dll:       BuildDoubleLinkedList[int]([]int{1, 2}),
 			index:     2,
 			wantErr:   errs.NewErrIndexOutOfRange(2, 2),
@@ -92,7 +92,7 @@ func TestDoubleLinkedList_Get(t *testing.T) {
 			wantSlice: []int{1, 2},
 		},
 		{
-			name:      "Get node at index 1",
+			name:      "Get skipListNode at index 1",
 			dll:       BuildDoubleLinkedList[int]([]int{1, 2}),
 			index:     1,
 			wantErr:   nil,
@@ -100,7 +100,7 @@ func TestDoubleLinkedList_Get(t *testing.T) {
 			wantSlice: []int{1, 2},
 		},
 		{
-			name:      "Get node at index 0",
+			name:      "Get skipListNode at index 0",
 			dll:       BuildDoubleLinkedList[int]([]int{1, 2}),
 			index:     0,
 			wantErr:   nil,

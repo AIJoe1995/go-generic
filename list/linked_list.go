@@ -142,20 +142,20 @@ func (dll *DoubleLinkedList[T]) Remove(val T) (int, bool) {
 		node.next.prev = dll.head
 		node.next = nil
 		dll.size -= 1
-		//todo  delete node release memory
+		//todo  delete skipListNode release memory
 	} else if res == dll.size-1 { // remove tail
 		dll.tail = node.prev
 		node.prev.next = nil
 		node.prev = nil
 		dll.size -= 1
-		// todo delete node release memory
+		// todo delete skipListNode release memory
 	} else if res == -1 { // not found
 		return res, false
 	} else {
 		node.prev.next = node.next
 		node.next.prev = node.prev
 		dll.size -= 1
-		// todo delete node release memory
+		// todo delete skipListNode release memory
 	}
 	return res, true
 }
@@ -165,7 +165,7 @@ func (dll *DoubleLinkedList[T]) RemoveAt(index int) (T, error) {
 	if index < 0 || index >= dll.size {
 		return res, errs.NewErrIndexOutOfRange(dll.size, index)
 	}
-	// todo delete node release memory
+	// todo delete skipListNode release memory
 	node := dll.head.next
 	// remove head
 	if index == 0 {
